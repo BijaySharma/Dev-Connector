@@ -1,0 +1,4 @@
+{
+  "mongo_uri": "mongodb+srv://webclient:webclient2020@devconnector.azl12.mongodb.net/devconnector?retryWrites=true&w=majority",
+  "jwt_secret": "mysecrettoken"
+}
