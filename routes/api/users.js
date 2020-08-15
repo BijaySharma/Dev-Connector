@@ -43,16 +43,25 @@ router.post('/',[
 
     await user.save();
 
-    // JWT
-    jwt.sign({user: {id: user.id}}, config.get('jwt_secret'), {expiresIn: 60 * 60, algorithm: 'HS256'}, (err, token) => {
-      if(err){
-        throw err;
-      }else{
-        res.status(200).json({token});
+    // Generate and send authorization token
+    const payload = {
+      user: {
+        id: user.id
       }
-    });
-   
+    };
 
+    jwt.sign(payload,
+      config.get('jwt_secret'),
+      { expiresIn: 60 * 60, algorithm: 'HS256' },
+      (err, token) => {
+        if(err){
+          throw err;
+        }else{
+          return res.status(200).json({token});
+        }
+      }
+    );
+   
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

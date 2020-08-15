@@ -11,14 +11,17 @@ export default function (req, res, next) {
 
   // Verify token
   try {
-    jwt.verify(token, config.get('jwt_secret'), (err, decoded) => {
-      if(err) {
-        throw err;
-      }else{
-        req.user = decoded.user;
-        next();
+    jwt.verify(token,
+      config.get('jwt_secret'),
+      (err, decoded) => {
+        if(err) {
+          throw err;
+        }else{
+          req.user = decoded.user;
+          next();
+        }
       }
-    });
+    );
    
   } catch (err) {
     res.status(401).json({ msg: "Token is not valid" });
