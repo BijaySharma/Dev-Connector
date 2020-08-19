@@ -1,4 +1,6 @@
 {
   "mongo_uri": "mongodb+srv://webclient:webclient2020@devconnector.azl12.mongodb.net/devconnector?retryWrites=true&w=majority",
-  "jwt_secret": "mysecrettoken"
+  "jwt_secret": "mysecrettoken",
+  "github_client_id": "0b5de60c907411a3b33a",
+  "github_secret": "8a79de074a60c7560d4869b66706d9157fbb4ddd"
 }

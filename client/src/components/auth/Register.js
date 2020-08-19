@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 
-const Regsiter = () => {
+const Regsiter = ({ setAlert, register, isAuthenticated }) => {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -16,11 +19,13 @@ const Regsiter = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if(password !== password2){
-      console.log("Passwords do not match.");
+      setAlert('Passwords do not match.', 'danger');
     }else{
-      console.log('success');
+      register({ name, email, password });
     }
   }
+
+  if(isAuthenticated) return <Redirect to='/dashboard' />;
 
   return (
     <Fragment>
@@ -66,4 +71,8 @@ const Regsiter = () => {
   );
 }
 
-export default Regsiter;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Regsiter);
