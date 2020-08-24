@@ -8,7 +8,8 @@ import {
   USER_LOADED,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  CLEAR_PROFILE
 } from './types';
 
 // Load User
@@ -28,7 +29,6 @@ export const loadUser = () => async dispatch => {
   }
 
 };
-
 // Log in User
 export const login = (email, password) => async dispatch => {
   // header configuration
@@ -86,5 +86,6 @@ export const register = ({ name, email, password }) => async dispatch => {
 // Log out user / clear profile
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
+  dispatch({ type: CLEAR_PROFILE });
 }
 
